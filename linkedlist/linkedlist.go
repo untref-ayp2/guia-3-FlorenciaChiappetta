@@ -24,8 +24,9 @@ func newNode[T comparable](value T) *node[T] {
 // LinkedList es la lista enlazada simple
 // contiene punteros al primer nodo y al último
 type LinkedList[T comparable] struct {
-	head *node[T] // puntero al primer nodo
-	tail *node[T] // puntero al último nodo
+	head   *node[T] // puntero al primer nodo
+	tail   *node[T] // puntero al último nodo
+	tamaño int
 }
 
 // NewLinkedList crea una nueva lista enlazada, vacía
@@ -48,6 +49,8 @@ func (l *LinkedList[T]) Append(value T) {
 	}
 	l.tail.next = newNode
 	l.tail = newNode
+	l.tamaño++
+
 }
 
 // Prepend agrega un nuevo nodo, con el valor recibido,
@@ -62,6 +65,7 @@ func (l *LinkedList[T]) Prepend(value T) {
 	}
 	newNode.next = l.head
 	l.head = newNode
+	l.tamaño++
 }
 
 // InsertAt agrega un nuevo nodo, con el valor recibido,
@@ -87,6 +91,7 @@ func (l *LinkedList[T]) InsertAt(value T, position int) {
 	}
 	newNode.next = current.next
 	current.next = newNode
+	l.tamaño++
 }
 
 // Remove elimina el primer nodo que contenga el valor recibido
@@ -97,7 +102,9 @@ func (l *LinkedList[T]) Remove(value T) {
 	}
 	if l.head.value == value {
 		l.head = l.head.next
+		l.tamaño--
 		return
+
 	}
 	current := l.head
 	for current.next != nil {
@@ -106,7 +113,9 @@ func (l *LinkedList[T]) Remove(value T) {
 			return
 		}
 		current = current.next
+
 	}
+	l.tamaño--
 }
 
 // String devuelve una representación en cadena de la lista
@@ -182,4 +191,8 @@ func (l *LinkedList[T]) Size() int {
 		position++
 	}
 	return position
+}
+
+func (l *LinkedList[T]) SizeFlor() int {
+	return l.tamaño // HAY QUE CORREGIR DONDE DECREMENTO LA VARIABLE EN EL METODO REMOVE.
 }
