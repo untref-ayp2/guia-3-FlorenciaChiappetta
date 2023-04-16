@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	l := linkedlist.NewLinkedList[int]()
-	/*fmt.Println("Agregamos 1, 2 y 3 al final de la lista")
+	/*l := linkedlist.NewLinkedList[int]()
+	fmt.Println("Agregamos 1, 2 y 3 al final de la lista")
 	l.Append(1)
 	l.Append(2)
 	l.Append(3)
@@ -43,8 +43,7 @@ func main() {
 	l.InsertAt(20, 1)
 	fmt.Println(l)
 	fmt.Println(l.Size())
-	fmt.Println(l.SizeFlor())*/
-
+	fmt.Println(l.SizeFlor())
 	l.Append(1)
 	l.Append(4)
 	l.Append(9)
@@ -82,6 +81,68 @@ func main() {
 	fmt.Println(lista1)
 	lista1.Remove(9)
 	fmt.Println(lista1)
-	fmt.Println(lista1.Search(2))*/
+	fmt.Println(lista1.Search(2))
 
+	l1 := linkedlist.NewLinkedList[int]()
+	l2 := linkedlist.NewLinkedList[int]()
+	l1.Append(0)
+	l1.Append(1)
+	l1.Append(2)
+	l1.Append(3)
+	l1.Append(4)
+	l2.Append(11)
+	fmt.Println(l1)
+	fmt.Println(l1.Size())
+
+	l2.Append(5)
+	l2.Append(6)
+	l2.Append(7)
+	l2.Append(8)
+	l2.Append(9)
+
+	fmt.Println(l2)
+	fmt.Println(l2.Size())
+	l1.ConcatenarLista(l1, l2)
+	fmt.Println(l1)
+
+	l3 := linkedlist.NewLinkedList[int]()
+	l3 = l3.ConcatenarLista(l1, l2)
+	fmt.Println(l3)
+
+	l3 = l3.IntercalarElementos(l1, l2)
+	fmt.Println(l3)
+
+	l4 := linkedlist.NewLinkedList[int]()
+	l4 = l4.MixList(l1, l2)
+	fmt.Println(l4)*/
+
+	l1 := linkedlist.NewLinkedList[int]()
+	l1.PilaPush(6)
+	l1.PilaPush(7)
+	l1.PilaPush(8)
+	l1.PilaPush(9)
+	l1.PilaPush(22)
+	fmt.Println(l1)
+
+	fmt.Println(l1.PilaPop())
+	fmt.Println(l1)
+
+	l1.PilaPush(11)
+	l1.PilaPush(12)
+	fmt.Println(l1)
+
+	l2 := linkedlist.NewLinkedList[int]()
+	l2.ColaEnqueue(1)
+	l2.ColaEnqueue(2)
+	l2.ColaEnqueue(3)
+	l2.ColaEnqueue(4)
+	l2.ColaEnqueue(5)
+	fmt.Println(l2)
+
+	fmt.Println(l2.ColaDequeue())
+	fmt.Println(l2)
+
+	l2.ColaEnqueue(5)
+	l2.ColaEnqueue(6)
+	fmt.Println(l2)
 }

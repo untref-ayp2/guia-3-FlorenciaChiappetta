@@ -196,3 +196,113 @@ func (l *LinkedList[T]) Size() int {
 func (l *LinkedList[T]) SizeFlor() int {
 	return l.tamaño // HAY QUE CORREGIR DONDE DECREMENTO LA VARIABLE EN EL METODO REMOVE.
 }
+
+// Escribir una función que reciba como parámetros dos listas del mismo tipo
+//y devuelva una lista resultante de concatenar la segunda lista al final de la primera
+
+func (l3 *LinkedList[T]) ConcatenarLista(l1, l2 *LinkedList[T]) *LinkedList[T] {
+	l1.tail.next = l2.head
+	l3 = l1
+	return l3
+}
+
+// 4. Escribir una función que reciba dos listas del mismo tipo
+// y devuelva la lista que resulta de intercalar uno a uno los elementos de ambas listas.
+func (l *LinkedList[T]) IntercalarElementos(l1, l2 *LinkedList[T]) *LinkedList[T] {
+
+	if l1.head == nil && l2.head == nil {
+		return nil
+	}
+	if l1.head != nil && l2.head == nil {
+		return l1
+	}
+	if l1.head == nil && l2.head != nil {
+		return l2
+	}
+
+	posicionActual := l1.head
+	posicionDestino := l2.head
+
+	i := l1.Size()
+	j := l2.Size()
+
+	if i > j {
+		for posicionActual != nil {
+			l.Append(posicionActual.value)
+
+			if posicionDestino != nil {
+				l.Append(posicionDestino.value)
+			}
+			posicionActual = posicionActual.next
+			posicionDestino = posicionDestino.next
+		}
+		return l
+	}
+
+	if i < j {
+		for posicionDestino != nil {
+
+			if posicionActual != nil {
+				l.Append(posicionActual.value)
+			}
+			l.Append(posicionDestino.value)
+
+			posicionActual = posicionActual.next
+			posicionDestino = posicionDestino.next
+		}
+		return l
+	}
+
+	if i == j {
+		for posicionActual != nil && posicionDestino != nil {
+			l.Append(posicionActual.value)
+			l.Append(posicionDestino.value)
+
+			posicionActual = posicionActual.next
+			posicionDestino = posicionDestino.next
+		}
+		return l
+	}
+
+	return nil
+}
+
+//Implementar una pila y una cola usando la lista enlazada simple
+
+// PILA
+// agrega un valor al tope de la pila
+func (pila *LinkedList[T]) PilaPush(value T) {
+	pila.Append(value)
+}
+
+// devuelve el valor del tope de la pila y lo elimina
+func (pila *LinkedList[T]) PilaPop() T {
+	posicion, _ := pila.Get(pila.Size() - 1)
+	pila.Remove(posicion)
+	return posicion
+}
+
+// devuelve el valor del tope de la pila
+func (pila *LinkedList[T]) PilaTop() T {
+	posicion, _ := pila.Get(pila.Size() - 1)
+	return posicion
+}
+
+// COLA
+// agrega un valor a la cola
+func (cola *LinkedList[T]) ColaEnqueue(value T) {
+	cola.Append(value)
+}
+
+// devuelve el valor del tope de la pila y lo elimina
+func (cola *LinkedList[T]) ColaDequeue() T {
+	posicion, _ := cola.Get(0)
+	cola.Remove(posicion)
+	return posicion
+}
+
+// devuelve el valor del tope de la pila
+func (cola *LinkedList[T]) ColaFront() T {
+	posicion, _ := cola.Get(0)
+	return posicion
+}
