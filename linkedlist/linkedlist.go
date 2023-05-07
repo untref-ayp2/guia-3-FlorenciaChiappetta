@@ -142,6 +142,7 @@ func (l *LinkedList[T]) String() string {
 // Search busca el primer nodo que contenga el valor recibido
 // y devuelve su posición en la lista o -1 si no lo encuentra
 // O(n)
+
 func (l *LinkedList[T]) Search(value T) int {
 	if l.head == nil {
 		return -1
@@ -167,7 +168,7 @@ func (l *LinkedList[T]) Get(position int) (T, error) {
 		return t, errors.New("Lista vacía")
 	}
 	current := l.head
-	for current != nil && position > 0 {
+	for current != nil && position > 1 {
 		current = current.next
 		position--
 	}
